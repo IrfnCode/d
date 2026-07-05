@@ -1,13 +1,15 @@
 const express = require('express');
 const app = express();
 const path = require('path');
-const port = 4444; // Pastikan port ini sama dengan yang disetting di Cloudflare Tunnel
+const port = 3000; // Pastikan port 3000 ini sudah disetting di Cloudflare Tunnel Anda
 
-// Endpoint untuk download database
+// Mengarah ke lokasi database yang Anda berikan
+const dbPath = '/back-old/data/database.sqlite';
+
 app.get('/download-db', (req, res) => {
-  const filePath = path.join(__dirname, 'database.sqlite');
-  res.download(filePath, 'database.sqlite', (err) => {
+  res.download(dbPath, 'database.sqlite', (err) => {
     if (err) {
+      console.error("Gagal download:", err);
       res.status(500).send("Gagal mengunduh file.");
     }
   });
