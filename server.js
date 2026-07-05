@@ -1,9 +1,13 @@
-const express = require('express');
-const app = express();
-const path = require('path');
-const port = 3000; // Pastikan port 3000 ini sudah disetting di Cloudflare Tunnel Anda
+import express from 'express';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-// Mengarah ke lokasi database yang Anda berikan
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const app = express();
+const port = 3000;
+
 const dbPath = '/back-old/data/database.sqlite';
 
 app.get('/download-db', (req, res) => {
@@ -16,5 +20,5 @@ app.get('/download-db', (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Server download aktif di http://localhost:${port}/download-db`);
+  console.log(`Server aktif di http://localhost:${port}/download-db`);
 });
